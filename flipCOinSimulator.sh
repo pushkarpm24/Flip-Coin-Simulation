@@ -44,23 +44,23 @@ function doubletCombination() {
 
 for (( index=0; index<$numOfFlip; index++ ))
 do
-      getHeadOrTail
+      		getHeadOrTail
 		result1=$coinResult
 		getHeadOrTail
 		result2=$coinResult
-      if [[ $result1$result2 == HH ]]
-      then
-            combinations[HH]=$((${combinations[HH]}+1))
+      		if [[ $result1$result2 == HH ]]
+      		then
+            		combinations[HH]=$((${combinations[HH]}+1))
 
-      elif [[ $result1$result2 == HT ]]
-		then
-            combinations[HT]=$((${combinations[HT]}+1))
-		elif [[ $result1$result2 == TT ]]
-		then
-				combinations[TT]=$((${combinations[TT]}+1))
-		else
-				combinations[TH]=$((${combinations[TH]}+1))
-      fi
+      		elif [[ $result1$result2 == HT ]]
+      		then
+            		combinations[HT]=$((${combinations[HT]}+1))
+      		elif [[ $result1$result2 == TT ]]
+      		then
+	    		combinations[TT]=$((${combinations[TT]}+1))
+      		else
+	    		combinations[TH]=$((${combinations[TH]}+1))
+      		fi
 done
 
 percentHH=$(((${combinations[HH]} * 100)/$numOfFlip))
@@ -74,12 +74,12 @@ function tripletCombination() {
 
 for (( index=0; index<$numOfFlip; index++ ))
 do
-      getHeadOrTail
-      result1=$coinResult
-      getHeadOrTail
-      result2=$coinResult
-		getHeadOrTail
-		result3=$coinResult
+      		getHeadOrTail
+      		result1=$coinResult
+      		getHeadOrTail
+      		result2=$coinResult
+      		getHeadOrTail
+      		result3=$coinResult
 
 		if [[ $result1$result2$result3 == HHH ]]
 		then
@@ -90,7 +90,7 @@ do
 				combinations[HHT]=$((${combinations[HHT]}+1))
 		elif [[ $result1$result2$result3 == HTT ]]
 		then
-            combinations[HTT]=$((${combinations[HTT]}+1))
+            			combinations[HTT]=$((${combinations[HTT]}+1))
 		elif [[ $result1$result2$result3 == HTH ]]
 		then
 				combinations[HTH]=$((${combinations[HTH]}+1))
@@ -102,11 +102,11 @@ do
 		then
 				combinations[TTH]=$((${combinations[TTH]}+1))
 		elif [[ $result1$result2$result3 == THH ]]
-      then
-            combinations[THH]=$((${combinations[THH]}+1))
+      		then
+            			combinations[THH]=$((${combinations[THH]}+1))
 		elif [[ $result1$result2$result3 == THT ]]
 		then
-            combinations[THT]=$((${combinations[TTH]}+1))
+            			combinations[THT]=$((${combinations[TTH]}+1))
 		fi
 done
 
