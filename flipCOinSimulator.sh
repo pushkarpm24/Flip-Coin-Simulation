@@ -44,23 +44,23 @@ function doubletCombination() {
 
 for (( index=0; index<$numOfFlip; index++ ))
 do
-      getHeadOrTail
+      		getHeadOrTail
 		result1=$coinResult
 		getHeadOrTail
 		result2=$coinResult
-      if [[ $result1$result2 == HH ]]
-      then
-            combinations[HH]=$((${combinations[HH]}+1))
+      		if [[ $result1$result2 == HH ]]
+      		then
+            	combinations[HH]=$((${combinations[HH]}+1))
 
-      elif [[ $result1$result2 == HT ]]
+      		elif [[ $result1$result2 == HT ]]
 		then
-            combinations[HT]=$((${combinations[HT]}+1))
+            	combinations[HT]=$((${combinations[HT]}+1))
 		elif [[ $result1$result2 == TT ]]
 		then
 				combinations[TT]=$((${combinations[TT]}+1))
 		else
 				combinations[TH]=$((${combinations[TH]}+1))
-      fi
+      		fi
 done
 
 percentHH=$(((${combinations[HH]} * 100)/$numOfFlip))
@@ -74,10 +74,10 @@ function tripletCombination() {
 
 for (( index=0; index<$numOfFlip; index++ ))
 do
-      getHeadOrTail
-      result1=$coinResult
-      getHeadOrTail
-      result2=$coinResult
+      		getHeadOrTail
+      		result1=$coinResult
+      		getHeadOrTail
+      		result2=$coinResult
 		getHeadOrTail
 		result3=$coinResult
 
@@ -90,7 +90,7 @@ do
 				combinations[HHT]=$((${combinations[HHT]}+1))
 		elif [[ $result1$result2$result3 == HTT ]]
 		then
-            combinations[HTT]=$((${combinations[HTT]}+1))
+            			combinations[HTT]=$((${combinations[HTT]}+1))
 		elif [[ $result1$result2$result3 == HTH ]]
 		then
 				combinations[HTH]=$((${combinations[HTH]}+1))
@@ -102,11 +102,11 @@ do
 		then
 				combinations[TTH]=$((${combinations[TTH]}+1))
 		elif [[ $result1$result2$result3 == THH ]]
-      then
-            combinations[THH]=$((${combinations[THH]}+1))
+      		then
+            			combinations[THH]=$((${combinations[THH]}+1))
 		elif [[ $result1$result2$result3 == THT ]]
 		then
-            combinations[THT]=$((${combinations[TTH]}+1))
+            			combinations[THT]=$((${combinations[TTH]}+1))
 		fi
 done
 
@@ -123,19 +123,19 @@ percentTHT=$(((${combinations[THT]} * 100)/$numOfFlip))
 
 function findMaxOutput() {
 
-	maxOutcomes=0
-   maxOutput=0
+	maxOutcomes=$1
+   	maxOutput=$2
 	for k in ${!combinations[@]}
-   do
+   	do
 
-      if [[ $maxOutcomes -lt ${combinations["$k"]} ]]
-      then
-         maxOutcomes=${combinations["$k"]}
-         maxOutput=$k
-      fi
-   done
+      		if [[ $maxOutcomes -lt ${combinations["$k"]} ]]
+      		then
+         		maxOutcomes=${combinations["$k"]}
+         		maxOutput=$k
+      		fi
+   	done
 
-   echo "Maximum Occurances are $maxOutcomes --> $maxOutput"
+   	echo "Maximum Occurances are $maxOutcomes --> $maxOutput"
 
 }
 
@@ -153,19 +153,19 @@ case $choice in
 		singletCombination
 		echo "SINGLATE COMBINATIONS.."
 		echo "H=${combinations[H]},T=${combinations[T]}"
-		findMaxOutput 0 0 ;;
+		findMaxOutput  ;;
 	2 )
 
 		doubletCombination
 		echo "DOUBLATE COMBINATIONS.."
 		echo "HH=${combinations[HH]},HT=${combinations[HT]},TT=${combinations[TT]},TH=${combinations[TH]}"
-   	findMaxOutput 0 0 ;;
+   		findMaxOutput  ;;
 	3 )
 
 		tripletCombination
 		echo "TRIPLATE COMBINATIONS.."
 		echo "HHH=${combinations[HHH]},HHT=${combinations[HHT]},HTT=${combinations[HTT]},HTH=${combinations[HTH]},TTT=${combinations[TTT]},TTH=${combinations[TTH]},THH=${combinations[THH]},THT=${combinations[THT]}"
-		findMaxOutput 0 0 ;;
+		findMaxOutput  ;;
 	4 )
 		temp=1 ;;
 
