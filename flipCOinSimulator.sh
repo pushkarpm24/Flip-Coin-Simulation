@@ -50,16 +50,16 @@ do
 		result2=$coinResult
       		if [[ $result1$result2 == HH ]]
       		then
-            		combinations[HH]=$((${combinations[HH]}+1))
+            			combinations[HH]=$((${combinations[HH]}+1))
 
       		elif [[ $result1$result2 == HT ]]
-      		then
-            		combinations[HT]=$((${combinations[HT]}+1))
-      		elif [[ $result1$result2 == TT ]]
-      		then
-	    		combinations[TT]=$((${combinations[TT]}+1))
-      		else
-	    		combinations[TH]=$((${combinations[TH]}+1))
+		then
+            			combinations[HT]=$((${combinations[HT]}+1))
+		elif [[ $result1$result2 == TT ]]
+		then
+				combinations[TT]=$((${combinations[TT]}+1))
+		else
+				combinations[TH]=$((${combinations[TH]}+1))
       		fi
 done
 
@@ -78,8 +78,8 @@ do
       		result1=$coinResult
       		getHeadOrTail
       		result2=$coinResult
-      		getHeadOrTail
-      		result3=$coinResult
+		getHeadOrTail
+		result3=$coinResult
 
 		if [[ $result1$result2$result3 == HHH ]]
 		then
@@ -121,44 +121,61 @@ percentTHT=$(((${combinations[THT]} * 100)/$numOfFlip))
 
 }
 
+function findMaxOutput() {
+
+	maxOutcomes=$1
+   	maxOutput=$2
+	for k in ${!combinations[@]}
+   	do
+
+      		if [[ $maxOutcomes -lt ${combinations["$k"]} ]]
+      		then
+         		maxOutcomes=${combinations["$k"]}
+         		maxOutput=$k
+      		fi
+   	done
+
+   	echo "Maximum Occurances are $maxOutcomes --> $maxOutput"
+
+}
+
+function getCombination () 
+{
+
+while [[ $temp -eq $choice ]]
+do
 read -p "Enter the number of time flipp the coin.." numOfFlip
+read -p "Enter your choice ::" choice
 
-singletCombination
-echo "HEAD Percentage is:$headPercent%"
-echo "Tail Percentage is:$tailPercent%"
-echo "**************************************"
+case $choice in
+	1 )
 
-echo "SINGLATE COMBINATIONS.."
-echo "H=${combinations[H]},T=${combinations[T]}"
+		singletCombination
+		echo "SINGLATE COMBINATIONS.."
+		echo "H=${combinations[H]},T=${combinations[T]}"
+		findMaxOutput  ;;
+	2 )
 
-echo "**************************************"
+		doubletCombination
+		echo "DOUBLATE COMBINATIONS.."
+		echo "HH=${combinations[HH]},HT=${combinations[HT]},TT=${combinations[TT]},TH=${combinations[TH]}"
+   		findMaxOutput  ;;
+	3 )
 
-doubletCombination
-echo "HH Percentage is:$percentHH%"
-echo "HT Percentage is:$percentHT%"
-echo "TT Percentage is:$percentTT%"
-echo "TH Percentage is:$percentTH%"
-
-echo "**************************************"
-
-echo "DOUBLATE COMBINATIONS.."
-echo "HH=${combinations[HH]},HT=${combinations[HT]},TT=${combinations[TT]},TH=${combinations[TH]}"
-
-echo "**************************************"
-
-tripletCombination
-echo "HHH Percentage is:$percentHHH%"
-echo "HHT Percentage is:$percentHHT%"
-echo "HTT Percentage is:$percentHTT%"
-echo "HTH Percentage is:$percentHTH%"
-echo "TTT Percentage is:$percentTTT%"
-echo "TTH Percentage is:$percentTTH%"
-echo "THH Percentage is:$percentTHH%"
-echo "THT Percentage is:$percentTHT%"
-
-echo "**************************************"
-
-echo "TRIPLATE COMBINATIONS.."
-echo "HHH=${combinations[HHH]},HHT=${combinations[HHT]},HTT=${combinations[HTT]},HTH=${combinations[HTH]},TTT=${combinations[TTT]},TTH=${combinations[TTH]},THH=${combinations[THH]},THT=${combinations[THT]}"
+		tripletCombination
+		echo "TRIPLATE COMBINATIONS.."
+		echo "HHH=${combinations[HHH]},HHT=${combinations[HHT]},HTT=${combinations[HTT]},HTH=${combinations[HTH]},TTT=${combinations[TTT]},TTH=${combinations[TTH]},THH=${combinations[THH]},THT=${combinations[THT]}"
+		findMaxOutput  ;;
+	4 )
+		temp=1 ;;
 
 
+esac
+done
+}
+
+
+getCombination
+
+
+ 
